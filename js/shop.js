@@ -77,23 +77,29 @@ function buy(id) {
     // 2. Add found product to the cartList array
     for (let i = 0; i < products.length; i++) {
         if (products[i].id === id) {
-            cartList.push(products[i]);
+            cartList.push(products[i]); //pusheo a la variable cartList vacia cada producto seleccionado por boton, comparando su id.
         }
     }
-    console.log(cartList) // vemos en la consola la lista de productos añadidos en el array cartList
-    return cartList;
+    console.log(cartList) // veo en la consola la lista de productos que se van añadiendo en el carrito (array cartList)
+    return cartList; // devuelvo la cartList actualizada con cada elemento que se va añadiendo de nuevo
 }
 
 // Exercise 2
 function cleanCart() {
-cartList = []
-console.log(cartList)
+cartList = [] // reasigno variable para que se quede vacia de nuevo cuando aprieto boton Clean Cart
+console.log(cartList) //veo en la consola como el carrito (array cartList) esta vacio al apretar el boton
 }
 
 // Exercise 3
-function calculateTotal() {
+function calculateTotal() { // la funcion es llamada en open_modal()
     // Calculate total price of the cart using the "cartList" array
+for (let i = 0; i < cartList.length; i++) {
+       total += cartList[i].price // recorro el array cartList y voy sumando al total todos los precios
+    }
+    console.log(total) // veo en la consola el total de todos los poductos seleccionados en cartList
+    return total; // devuelvo la suma del total de la cartList
 }
+
 
 // Exercise 4
 function generateCart() {
@@ -128,6 +134,7 @@ function removeFromCart(id) {
 }
 
 function open_modal() {
+    calculateTotal()
     console.log("Open Modal");
     printCart();
 }
