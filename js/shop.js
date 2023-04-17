@@ -100,12 +100,26 @@ for (let i = 0; i < cartList.length; i++) {
     return total; // devuelvo la suma del total de la cartList
 }
 
-
 // Exercise 4
 function generateCart() {
     // Using the "cartlist" array that contains all the items in the shopping cart, 
     // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
+for (let i = 0; i < cartList.length; i++) {
+    const product = cartList[i]
+    const productExist = cart.includes(product) // recorro el array cartList para saber si ya existe en la lista
+
+    if (!productExist) {
+        product.quantity = 1
+        cart.push(product) // si no existe pusheo la propiedad quantity en 1
+    }   
+    if (productExist) {
+        product.quantity++ // si existe añado 1 a la propiedad quantity
+    } 
 }
+console.log(cart) // veo en consola el array cart
+}
+
+
 
 // Exercise 5
 function applyPromotionsCart() {
@@ -135,6 +149,7 @@ function removeFromCart(id) {
 
 function open_modal() {
     calculateTotal()
+    generateCart()
     console.log("Open Modal");
     printCart();
 }
