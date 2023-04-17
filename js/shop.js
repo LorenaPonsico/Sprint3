@@ -1,6 +1,6 @@
 // If you have time, you can move this variable "products" to a json or js file and load the data in this js. It will look more professional
 var products = [
-   {
+    {
         id: 1,
         name: 'cooking oil',
         price: 10.5,
@@ -86,7 +86,8 @@ function buy(id) {
 
 // Exercise 2
 function cleanCart() {
-
+cartList = []
+console.log(cartList)
 }
 
 // Exercise 3
@@ -126,7 +127,7 @@ function removeFromCart(id) {
     // 2. Add found product to the cartList array
 }
 
-function open_modal(){
-	console.log("Open Modal");
-	printCart();
+function open_modal() {
+    console.log("Open Modal");
+    printCart();
 }
