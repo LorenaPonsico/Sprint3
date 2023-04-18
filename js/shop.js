@@ -153,8 +153,9 @@ function applyPromotionsCart() {
 function printCart() { // funcion que pinta la shopping cart dinamica
     // Fill the shopping cart modal manipulating the shopping cart dom
 
-    let shoppingCart = [];
-    for (let i = 0; i < cart.length; i++){
+    let shoppingCart = []; // array vacio para ir pusheando cada producto seleccionado por el cliente
+
+    for (let i = 0; i < cart.length; i++){ // bucle for que recorre la cart y pushea cada elemento seleccionado
         console.log(cart[i])
         shoppingCart.push(
             `<tr>
@@ -165,7 +166,7 @@ function printCart() { // funcion que pinta la shopping cart dinamica
             </tr>`
          )
      }
-     document.getElementById("cart_list").innerHTML = shoppingCart.join(" ");
+     document.getElementById("cart_list").innerHTML = shoppingCart.join(" "); // se imprime el array con todos los elementos seleccionados para comprar
 }
     
 
