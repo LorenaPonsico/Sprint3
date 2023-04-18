@@ -150,9 +150,24 @@ function applyPromotionsCart() {
 }
 
 // Exercise 6
-function printCart() {
+function printCart() { // funcion que pinta la shopping cart dinamica
     // Fill the shopping cart modal manipulating the shopping cart dom
+
+    let shoppingCart = [];
+    for (let i = 0; i < cart.length; i++){
+        console.log(cart[i])
+        shoppingCart.push(
+            `<tr>
+             <th scope="row">${cart[i].name}</th>
+             <td>$${cart[i].price}</td>
+             <td>${cart[i].quantity}</td>
+             <td>${cart[i].quantity*cart[i].price}</td>            
+            </tr>`
+         )
+     }
+     document.getElementById("cart_list").innerHTML = shoppingCart.join(" ");
 }
+    
 
 
 // ** Nivell II **
