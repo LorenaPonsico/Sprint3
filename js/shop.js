@@ -119,8 +119,6 @@ function generateCart() {
     console.log(cart) // veo en consola el array cart
 }
 
-
-
 // Exercise 5
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
@@ -160,7 +158,7 @@ function printCart() { // funcion que pinta la shopping cart dinamica
         shoppingCart.push(
             `<tr>
              <th scope="row">${cart[i].name}</th>
-             <td>$${cart[i].price}</td>
+             <td>${cart[i].price}</td>
              <td>${cart[i].quantity}</td>
              <td>${cart[i].quantity*cart[i].price}</td>            
             </tr>`
@@ -173,14 +171,14 @@ function printCart() { // funcion que pinta la shopping cart dinamica
 
 // ** Nivell II **
 
-// Exercise 7
+// Exercise 8
 function addToCart(id) {
     // Refactor previous code in order to simplify it 
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cart array or update its quantity in case it has been added previously.
 }
 
-// Exercise 8
+// Exercise 9
 function removeFromCart(id) {
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cartList array
