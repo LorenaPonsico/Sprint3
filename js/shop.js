@@ -75,13 +75,15 @@ var total = 0;
 function buy(id) {
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cartList array
+
+    /*
     for (let i = 0; i < products.length; i++) {
         if (products[i].id === id) {
             cartList.push(products[i]); //pusheo a la variable cartList vacia cada producto seleccionado por boton, comparando su id.
         }
     }
-    console.log(cartList) // veo en la consola la lista de productos que se van añadiendo en el carrito (array cartList)
-    return cartList; // devuelvo la cartList actualizada con cada elemento que se va añadiendo de nuevo
+    */
+    addToCart(id)
 }
 
 // Exercise 2
@@ -176,6 +178,13 @@ function addToCart(id) {
     // Refactor previous code in order to simplify it 
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cart array or update its quantity in case it has been added previously.
+
+    for (let i = 0; i < products.length; i++) {
+        if (products[i].id === id) {
+            cartList.push(products[i]); //pusheo a la variable cartList vacia cada producto seleccionado por boton, comparando su id.
+        }
+    }
+    
 }
 
 // Exercise 9
