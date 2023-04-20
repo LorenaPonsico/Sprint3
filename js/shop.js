@@ -68,6 +68,7 @@ var cartList = [];
 
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
 var cart = [];
+console.log(cart)
 
 var total = 0;
 
@@ -88,18 +89,28 @@ function buy(id) {
 
 // Exercise 2
 function cleanCart() {
-    cartList = [] // reasigno variable para que se quede vacia de nuevo cuando aprieto boton Clean Cart
-    console.log(cartList) //veo en la consola como el carrito (array cartList) esta vacio al apretar el boton
+    cart = [] 
+    total = 0
+
+    printCart()
 }
 
 // Exercise 3
 function calculateTotal() { // la funcion es llamada en open_modal()
     // Calculate total price of the cart using the "cartList" array
-    for (let i = 0; i < cartList.length; i++) {
-        total += cartList[i].price // recorro el array cartList y voy sumando al total todos los precios
+    total = 0
+    for (let i = 0; i < cart.length; i++) {
+        if(cart[i].subtotalWithDiscount){
+        total += cart[i].subtotalWithDiscount // recorro el array cartList y voy sumando al total todos los precios
     }
-    console.log(total) // veo en la consola el total de todos los poductos seleccionados en cartList
-    return total; // devuelvo la suma del total de la cartList
+    else if (cart[i].price) {
+        total += cart[i].price
+        
+    }
+    console.log(total)
+    document.getElementById("total_price").innerHTML = total
+  
+}
 }
 
 // Exercise 4
@@ -133,28 +144,30 @@ function applyPromotionsCart() {
 
         if (products.name === "cooking oil" && products.quantity > 2) {
             subtotalWithDiscount.push(products.quantity * 10)
+            cart[i].subtotalWithDiscount = products.quantity * 10
         }
         else if (products.name === "Instant cupcake mixture" && products.quantity > 9) {
             subtotalWithDiscount.push(products.quantity * (10 / 3))
+            cart[i].subtotalWithDiscount = products.quantity * (10 / 3)
         }
         else {
             subtotalWithDiscount.push(products.quantity * products.price) // los productos que no tienen descuento se pushean con el precio del producto base
+            cart[i].subtotalWithDiscount = products.quantity * products.price;
         }
 
     }
-    for (let i = 0; i < subtotalWithDiscount.length; i++) { // recorro el array con todos los precios totales con dto aplicaodos y sin del carrito y los sumo para obtener un total final
-        total += subtotalWithDiscount[i]
+    console.log(subtotalWithDiscount)
+    
     }
 
 
-    console.log(total) //veo en consola el total de los productos del carrito con los dtos aplicados
-    return total
-}
+
 
 // Exercise 6
 function printCart() { // funcion que pinta la shopping cart dinamica
     // Fill the shopping cart modal manipulating the shopping cart dom
-
+   applyPromotionsCart()
+   calculateTotal()
     let shoppingCart = []; // array vacio para ir pusheando cada producto seleccionado por el cliente
 
     for (let i = 0; i < cart.length; i++){ // bucle for que recorre la cart y pushea cada elemento seleccionado
@@ -165,11 +178,15 @@ function printCart() { // funcion que pinta la shopping cart dinamica
              <td>${cart[i].price}</td>
              <td>${cart[i].quantity}</td>
              <td>${cart[i].quantity*cart[i].price}</td>  
-             <td>${cart[i].quantity*cart[i].subtotalWithDiscount}</td>            
+             <td>$${cart[i].subtotalWithDiscount.toFixed(2) !== undefined ? cart[i].subtotalWithDiscount.toFixed(2) : cart[i].subtotal.toFixed(2)}</td>
+             <td><button type="button" onclick="addToCart(${cart[i].id})" class="btn btn-outline-dark">+</button></td>
+             <td><button type="button" onclick="removeFromCart(${cart[i].id})" class="btn btn-outline-dark">-</button></td>          
             </tr>`
          )
      }
      document.getElementById("cart_list").innerHTML = shoppingCart.join(" "); // se imprime el array con todos los elementos seleccionados para comprar
+     document.getElementById("total_price").innerHTML = total.toFixed(2)
+    
 }
     
 
@@ -194,12 +211,28 @@ function addToCart(id) {
         } else {
           cart.push({...productToAdd, quantity: 1});
         }   
+
+        printCart()
 }
 
 // Exercise 9
 function removeFromCart(id) {
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cartList array
+
+    const existingProductIndex = cart.findIndex(product => product.id === id);
+  
+    if (existingProductIndex >= 0) {
+      const existingProduct = cart[existingProductIndex];
+      if (existingProduct.quantity > 1) {
+        existingProduct.quantity--;
+      } else {
+        cart.splice(existingProductIndex, 1);
+      }
+    }
+
+        printCart()
+
 }
 
 function open_modal() {
@@ -207,5 +240,5 @@ function open_modal() {
     generateCart()
     applyPromotionsCart()
     console.log("Open Modal");
-    printCart();
+    // printCart();
 }
