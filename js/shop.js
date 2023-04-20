@@ -106,19 +106,20 @@ function calculateTotal() { // la funcion es llamada en open_modal()
 function generateCart() {
     // Using the "cartlist" array that contains all the items in the shopping cart, 
     // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
-    for (let i = 0; i < cartList.length; i++) {
-        const product = cartList[i]
-        const productExist = cart.includes(product) // recorro el array cartList para saber si ya existe en la lista
 
-        if (!productExist) {
-            product.quantity = 1
-            cart.push(product) // si no existe pusheo la propiedad quantity en 1
-        }
-        if (productExist) {
-            product.quantity++ // si existe incremento en 1 la propiedad quantity
-        }
-    }
-    console.log(cart) // veo en consola el array cart
+    // for (let i = 0; i < cartList.length; i++) {
+    //     const product = cartList[i]
+    //     const productExist = cart.includes(product) // recorro el array cartList para saber si ya existe en la lista
+
+    //     if (!productExist) {
+    //         product.quantity = 1
+    //         cart.push(product) // si no existe pusheo la propiedad quantity en 1
+    //     }
+    //     if (productExist) {
+    //         product.quantity++ // si existe incremento en 1 la propiedad quantity
+    //     }
+    // }
+    // console.log(cart) // veo en consola el array cart
 }
 
 // Exercise 5
@@ -145,6 +146,7 @@ function applyPromotionsCart() {
         total += subtotalWithDiscount[i]
     }
 
+
     console.log(total) //veo en consola el total de los productos del carrito con los dtos aplicados
     return total
 }
@@ -162,14 +164,14 @@ function printCart() { // funcion que pinta la shopping cart dinamica
              <th scope="row">${cart[i].name}</th>
              <td>${cart[i].price}</td>
              <td>${cart[i].quantity}</td>
-             <td>${cart[i].quantity*cart[i].price}</td>            
+             <td>${cart[i].quantity*cart[i].price}</td>  
+             <td>${cart[i].quantity*cart[i].subtotalWithDiscount}</td>            
             </tr>`
          )
      }
      document.getElementById("cart_list").innerHTML = shoppingCart.join(" "); // se imprime el array con todos los elementos seleccionados para comprar
 }
     
-
 
 // ** Nivell II **
 
@@ -179,12 +181,19 @@ function addToCart(id) {
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cart array or update its quantity in case it has been added previously.
 
-    for (let i = 0; i < products.length; i++) {
-        if (products[i].id === id) {
-            cartList.push(products[i]); //pusheo a la variable cartList vacia cada producto seleccionado por boton, comparando su id.
+        const productToAdd = products.find(product => product.id === id);
+      
+        if (!productToAdd) {
+          return;
         }
-    }
-    
+      
+        const existingProduct = cart.find(product => product.id === id);
+      
+        if (existingProduct) {
+          existingProduct.quantity++;
+        } else {
+          cart.push({...productToAdd, quantity: 1});
+        }   
 }
 
 // Exercise 9
