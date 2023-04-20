@@ -29,7 +29,7 @@
 						 <li class="dropdown search-dropdown nav-item py-lg-3">						 
 							 
 								<a href="javascript:void(0)" class="btn btn-outline-dark flex-center" type="button" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="open_modal()" data-bs-auto-close="outside">
-								<i class="fas fa-shopping-cart me-1"></i> Cart <span class="badge bg-dark text-white ms-1 rounded-pill" id="count_product">0</span>
+								<i class="fas fa-shopping-cart me-1"></i> Cart <span class="badge bg-dark text-white ms-1 rounded-pill" id="count_product"></span>
 							 </a>
 							
 						 </li>
@@ -40,13 +40,13 @@
 
 					 <ul class="navbar-nav me-auto mb-4 mb-lg-0 ms-lg-5">
 						 <li class="nav-item">
-						  <a class="nav-link" href="#grocery"><i class="fas fa-shopping-basket"></i> Grocery</a>
+						  <a class="nav-link" href="#grocery"><i class="fas fa-shopping-basket"></i>Hair</a>
 						</li>
 						<li class="nav-item">
-						  <a class="nav-link" href="#beauty"><i class="fas fa-heart"></i> Beauty</a>
+						  <a class="nav-link" href="#beauty"><i class="fas fa-heart"></i>Body</a>
 						</li>
 						<li class="nav-item">
-						  <a class="nav-link" href="#clothes"><i class="fas fa-tshirt"></i> Clothes</a>
+						  <a class="nav-link" href="#clothes"><i class="fas fa-tshirt"></i>Face</a>
 						</li>
 
 					 </ul>
@@ -65,7 +65,7 @@
         </header>
 		<!-- Section-->
 		<section class="pt-5" id="grocery">
-			<h2 class="text-center"><i class="fas fa-shopping-basket pe-3"></i>Grocery</h2>
+			<h2 class="text-center"><i class="fas fa-shopping-basket pe-3"></i>Hair</h2>
 			<div class="container px-4 px-lg-5 mt-5">
 				<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 					<div class="col mb-5">
@@ -73,7 +73,7 @@
 							<img class="card-img-top" src="./images/product.svg" alt="..." />
 							<div class="card-body p-4">
 								<div class="text-center">
-									<h5 class="fw-bolder">Cooking Oil</h5>
+									<h5 class="fw-bolder">Lime & mint refreshing shampoo</h5>
 									$10.5
 								</div>
 							</div>
@@ -87,7 +87,7 @@
 							<img class="card-img-top" src="./images/product.svg" alt="..." />
 							<div class="card-body p-4">
 								<div class="text-center">
-									<h5 class="fw-bolder">Pasta</h5>
+									<h5 class="fw-bolder">Coconut & soya hair conditioner</h5>
 									$6.25
 								</div>
 							</div>
@@ -101,7 +101,7 @@
 							<img class="card-img-top" src="./images/product.svg" alt="..." />
 							<div class="card-body p-4">
 								<div class="text-center">
-									<h5 class="fw-bolder">Instant cupcake mixture</h5>
+									<h5 class="fw-bolder">Pack “Green beauty” Hair zero waste</h5>
 									$5
 								</div>
 							</div>
@@ -115,7 +115,7 @@
 			</div>
 		</section>
 		<section class="pt-5" id="beauty">
-			 <h2 class="text-center"><i class="fas fa-heart pe-3"></i>Beauty</h2>
+			 <h2 class="text-center"><i class="fas fa-heart pe-3"></i>Body</h2>
 			<div class="container px-4 px-lg-5 mt-5">
 				<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 					<div class="col mb-5">
@@ -165,7 +165,7 @@
 			</div>
 		</section>
 		<section class="pt-5" id="clothes">
-			 <h2 class="text-center"><i class="fas fa-tshirt pe-3"></i>Clothes</h2>
+			 <h2 class="text-center"><i class="fas fa-tshirt pe-3"></i>Face</h2>
 			<div class="container px-4 px-lg-5 mt-5">
 				<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 					<div class="col mb-5">
@@ -235,12 +235,12 @@
 						  <th scope="col">Product</th>
 						  <th scope="col">Price</th>
 						  <th scope="col">Qty.</th>
-						  <th scope="col">Total <small></small></th>
+						  <th scope="col">Total</th>
 						  <th scope="col">Total <small>(with discount)</small></th>
 						</tr>
 					  </thead>
 					  <tbody id="cart_list">
-						<tr>
+						<!-- <tr>
 						  <th scope="row">Cooking oil</th>
 						  <td>$10.5</td>
 						  <td>2</td>
@@ -257,7 +257,7 @@
 						  <td>$15</td>
 						  <td>3</td>
 						  <td>$45</td>
-						</tr>
+						</tr> -->
 					  </tbody>
 				  </table>
 				  <div class="text-center fs-3">

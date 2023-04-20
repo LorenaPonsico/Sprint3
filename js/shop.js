@@ -68,9 +68,10 @@ var cartList = [];
 
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
 var cart = [];
-console.log(cart)
+// console.log(cart)
 
 var total = 0;
+let totalToShow = 0;
 
 // Exercise 1
 function buy(id) {
@@ -89,10 +90,12 @@ function buy(id) {
 
 // Exercise 2
 function cleanCart() {
-    cart = [] 
+    cart = []
     total = 0
 
     printCart()
+
+    document.getElementById("count_product").innerHTML = 0
 }
 
 // Exercise 3
@@ -100,17 +103,13 @@ function calculateTotal() { // la funcion es llamada en open_modal()
     // Calculate total price of the cart using the "cartList" array
     total = 0
     for (let i = 0; i < cart.length; i++) {
-        if(cart[i].subtotalWithDiscount){
-        total += cart[i].subtotalWithDiscount // recorro el array cartList y voy sumando al total todos los precios
+        if (cart[i].subtotalWithDiscount) {
+            total += cart[i].subtotalWithDiscount // recorro el array cartList y voy sumando al total todos los precios
+            console.log(cart)
+        }
+
+        document.getElementById("total_price").innerHTML = total
     }
-    else if (cart[i].price) {
-        total += cart[i].price
-        
-    }
-    console.log(total)
-    document.getElementById("total_price").innerHTML = total
-  
-}
 }
 
 // Exercise 4
@@ -154,41 +153,34 @@ function applyPromotionsCart() {
             subtotalWithDiscount.push(products.quantity * products.price) // los productos que no tienen descuento se pushean con el precio del producto base
             cart[i].subtotalWithDiscount = products.quantity * products.price;
         }
-
     }
-    console.log(subtotalWithDiscount)
-    
-    }
-
-
-
+}
 
 // Exercise 6
 function printCart() { // funcion que pinta la shopping cart dinamica
     // Fill the shopping cart modal manipulating the shopping cart dom
-   applyPromotionsCart()
-   calculateTotal()
+    applyPromotionsCart()
+    calculateTotal()
     let shoppingCart = []; // array vacio para ir pusheando cada producto seleccionado por el cliente
 
-    for (let i = 0; i < cart.length; i++){ // bucle for que recorre la cart y pushea cada elemento seleccionado
-        console.log(cart[i])
+    for (let i = 0; i < cart.length; i++) { // bucle for que recorre la cart y pushea cada elemento seleccionado
+        // console.log(cart[i])
         shoppingCart.push(
             `<tr>
              <th scope="row">${cart[i].name}</th>
              <td>${cart[i].price}</td>
              <td>${cart[i].quantity}</td>
-             <td>${cart[i].quantity*cart[i].price}</td>  
-             <td>$${cart[i].subtotalWithDiscount.toFixed(2) !== undefined ? cart[i].subtotalWithDiscount.toFixed(2) : cart[i].subtotal.toFixed(2)}</td>
+             <td>${cart[i].quantity * cart[i].price}</td>  
+             <td>$${cart[i].subtotalWithDiscount.toFixed(2) !== undefined ? cart[i].subtotalWithDiscount.toFixed(2) : cart[i].price.toFixed(2)}</td>
              <td><button type="button" onclick="addToCart(${cart[i].id})" class="btn btn-outline-dark">+</button></td>
              <td><button type="button" onclick="removeFromCart(${cart[i].id})" class="btn btn-outline-dark">-</button></td>          
             </tr>`
-         )
-     }
-     document.getElementById("cart_list").innerHTML = shoppingCart.join(" "); // se imprime el array con todos los elementos seleccionados para comprar
-     document.getElementById("total_price").innerHTML = total.toFixed(2)
-    
+        )
+    }
+    document.getElementById("cart_list").innerHTML = shoppingCart.join(" "); // se imprime el array con todos los elementos seleccionados para comprar
+    document.getElementById("total_price").innerHTML = total.toFixed(2)
 }
-    
+
 
 // ** Nivell II **
 
@@ -197,22 +189,25 @@ function addToCart(id) {
     // Refactor previous code in order to simplify it 
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cart array or update its quantity in case it has been added previously.
+    
+    const productToAdd = products.find(product => product.id === id);
 
-        const productToAdd = products.find(product => product.id === id);
-      
-        if (!productToAdd) {
-          return;
-        }
-      
-        const existingProduct = cart.find(product => product.id === id);
-      
-        if (existingProduct) {
-          existingProduct.quantity++;
-        } else {
-          cart.push({...productToAdd, quantity: 1});
-        }   
+    if (!productToAdd) {
+        return;
+    }
 
-        printCart()
+    const existingProduct = cart.find(product => product.id === id);
+
+    if (existingProduct) {
+        existingProduct.quantity++;
+        totalToShow++
+    } else {
+        cart.push({...productToAdd, quantity: 1 });
+        totalToShow++
+    }
+    printCart()
+
+    document.getElementById("count_product").innerHTML = totalToShow
 }
 
 // Exercise 9
@@ -221,24 +216,26 @@ function removeFromCart(id) {
     // 2. Add found product to the cartList array
 
     const existingProductIndex = cart.findIndex(product => product.id === id);
-  
-    if (existingProductIndex >= 0) {
-      const existingProduct = cart[existingProductIndex];
-      if (existingProduct.quantity > 1) {
-        existingProduct.quantity--;
-      } else {
-        cart.splice(existingProductIndex, 1);
-      }
-    }
 
-        printCart()
+    if (existingProductIndex >= 0) {
+        const existingProduct = cart[existingProductIndex];
+        if (existingProduct.quantity > 1) {
+            existingProduct.quantity--;
+            totalToShow--
+        } else {
+            cart.splice(existingProductIndex, 1);
+            totalToShow--
+        }
+    }
+    printCart()
+
+    document.getElementById("count_product").innerHTML = totalToShow
 
 }
 
 function open_modal() {
-    calculateTotal()
-    generateCart()
-    applyPromotionsCart()
-    console.log("Open Modal");
-    // printCart();
+    // calculateTotal()
+    // generateCart()
+    // applyPromotionsCart()
+    printCart();
 }
