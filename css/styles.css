@@ -15,7 +15,27 @@
   display: block;
   color: red;
 } */
+.fontType{
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+.main-color{
+  background-color:#fab1a0;
+}
+.image-one{
+  background-image: url("/images/imagenes web/cuidados.jpg") ;
+background-size: cover;
+background-attachment: fixed;
+}
 
+.images-hair-body-face{
+width: 50%;
+height: 45%;
+
+}
+
+h1{
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
 
 :root {
   --bs-blue: #0d6efd;
