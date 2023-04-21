@@ -68,8 +68,6 @@ var cartList = [];
 
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
 var cart = [];
-// console.log(cart)
-
 var total = 0;
 let totalToShow = 0;
 
@@ -105,7 +103,7 @@ function calculateTotal() { // la funcion es llamada en open_modal()
     for (let i = 0; i < cart.length; i++) {
         if (cart[i].subtotalWithDiscount) {
             total += cart[i].subtotalWithDiscount // recorro el array cartList y voy sumando al total todos los precios
-            console.log(cart)
+            // console.log(cart)
         }
 
         document.getElementById("total_price").innerHTML = total
@@ -136,14 +134,14 @@ function generateCart() {
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
     let subtotalWithDiscount = [] // array vacio donde con el primer bucle for voy añadiendo los precios totales con el descuento aplicado de cada producto
-    let total = 0 // creo una variable para sumar el total del array anterior
+    // let total = 0 // creo una variable para sumar el total del array anterior
 
     for (let i = 0; i < cart.length; i++) { // bucle for recorre el array cart (carrito compra final) y si cumple con las condiciones de descuento pushea la suma del total con el dto ya aplicado
         const products = cart[i]
 
         if (products.name === "cooking oil" && products.quantity > 2) {
-            subtotalWithDiscount.push(products.quantity * 10)
-            cart[i].subtotalWithDiscount = products.quantity * 10
+            subtotalWithDiscount.push(products.quantity * 10) // cuando cumple estas condiciones pushea la cantidad con el descuento aplicado
+            cart[i].subtotalWithDiscount = products.quantity * 10 // asigno el valor de subtotal con descuento a la propiedad subtotalWithDiscount del objeto products. Esta nueva propiedad se asigna a cada objeto del array cart con el valor del subtotal con descuento del producto correspondiente
         }
         else if (products.name === "Instant cupcake mixture" && products.quantity > 9) {
             subtotalWithDiscount.push(products.quantity * (10 / 3))
@@ -189,7 +187,7 @@ function addToCart(id) {
     // Refactor previous code in order to simplify it 
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cart array or update its quantity in case it has been added previously.
-    
+
     const productToAdd = products.find(product => product.id === id);
 
     if (!productToAdd) {
@@ -202,7 +200,7 @@ function addToCart(id) {
         existingProduct.quantity++;
         totalToShow++
     } else {
-        cart.push({...productToAdd, quantity: 1 });
+        cart.push({ ...productToAdd, quantity: 1 });
         totalToShow++
     }
     printCart()
