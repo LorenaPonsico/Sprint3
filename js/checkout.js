@@ -12,6 +12,7 @@ function addInvalidClass(element, error) {
 
 function validate() {
 	let error = 0;
+	let checkOutForm = document.getElementById("checkOutForm"); //capturamos el formulario en una variable por el ID
 	// Get the input fields
 	let fName = document.getElementById("fName");
 	let fEmail = document.getElementById("fEmail");
@@ -35,27 +36,27 @@ function validate() {
 		addInvalidClass(fEmail, false);
 	}
 
-	if (fAddress == "" || fAddress.value.length < 3) {
+	if (fAddress.value == "" || fAddress.value.length < 3) {
 		addInvalidClass(fAddress, true);
 		error++;
 	} else {
 		addInvalidClass(fAddress, false);
 	}
 
-	if (fLastN == "" || fLastN.value.length < 3 || !fLastN.value.match(/^[a-zA-Z]+$/)) {
+	if (fLastN.value == "" || fLastN.value.length < 3 || !fLastN.value.match(/^[a-zA-Z]+$/)) {
 		addInvalidClass(fLastN, true);
 		error++;
 	} else {
 		addInvalidClass(fLastN, false);
 	}
-	if (fPassword == "" || fPassword.value.length < 3 || !fPassword.value.match(/^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{3,8}$/)) {
+	if (fPassword.value == "" || fPassword.value.length < 3 || !fPassword.value.match(/^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{3,8}$/)) {
 		addInvalidClass(fPassword, true);
 		error++;
 	} else {
 		addInvalidClass(fPassword, false);
 	}
 
-	if (fPhone == "" || fPhone.value.length < 3 || isNaN(fPhone.value)) {
+	if (fPhone.value == "" || fPhone.value.length < 3 || isNaN(fPhone.value)) {
 		addInvalidClass(fPhone, true);
 		error++;
 	} else {
@@ -63,8 +64,10 @@ function validate() {
 	}
 
 	if (error > 0) {
-		alert("Error");
+		checkOutForm.addEventListener("submit", (event) => { //capturamos el evento submit(por defecto envia los datos y se reinicia) y le pasamos el metodo que queremos hacer para detener el comportamiento de submit de recarga del formulario (preventDefault/que no se reinicie la web)
+			event.preventDefault(); // prevenir el comportamiento por defecto del formulario/metodo submit
+		});
 	} else {
 		alert("OK");
-	} 
+	}
 }
